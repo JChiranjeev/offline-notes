@@ -2,6 +2,8 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.1.0.
 
+A practice application made using Angular 9 and UIKit CSS framework that allows the user to store notes offline on the computer. The notes are encrypted with user's password so nothing leaves the user's device at any point. 
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
