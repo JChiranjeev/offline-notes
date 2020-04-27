@@ -1,25 +1,138 @@
-<body>
-    <div class="session">
-        <div class="left">
-            <svg enable-background="new 0 0 300 302.5" version="1.1" viewBox="0 0 300 302.5" xml:space="preserve"
-                xmlns="http://www.w3.org/2000/svg">
-                <style type="text/css">
-                </style>
-            </svg>
+<body class="color-grey height-100vh font-raleway-500">
+    <div class="container-fluid">
+        <div class="row vertical-center justify-content-center d-flex no-wrap">
+            <div class="col-md-7 col-sm-12 color-blue md-height-100vh d-flex justify-content-center">
+                <img src="../../../../assets/files/illustrations/notebook.svg" class="rounded notebook-size"
+                    alt="Notebook Illustration">
+            </div>
+            <div class="col-md-5 col-sm-12 color-grey md-height-100vh vertical-center py-5">
+
+                <!-- Login Form -->
+                <div class="container-fluid" class="login-form">
+                    <div class="row px-4">
+                        <div class="col-12">
+                            <h1 class="mb-5 display-4">Your offline notebook.</h1>
+                            <h5>Store your notes. All offline and fully encrypted.</h5>
+                            <h6>Your data never leaves your device.</h6>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row px-4">
+                        <form>
+                            <div class="form-row mb-4 px-4">
+                                <div class="col-2 vertical-center">
+                                    <img src="../../../../assets/files/illustrations/user.svg"
+                                        class="rounded form-icon-size" alt="Username Icon">
+                                </div>
+                                <div class="col-10">
+                                    <label for="loginUsername">Username</label>
+                                    <input type="text" class="form-control" id="loginUsername" name="loginUsername"
+                                        aria-describedby="loginUsernameHelp" placeholder="Enter Username"
+                                        [(ngModel)]="loginUsername">
+                                    <small id="loginUsernameHelp" class="form-text text-muted">Your username will be
+                                        your
+                                        identity.</small>
+                                </div>
+                            </div>
+                            <div class="form-row mb-4 px-4">
+                                <div class="col-2 vertical-center">
+                                    <img src="../../../../assets/files/illustrations/password.svg"
+                                        class="rounded form-icon-size" alt="Password Icon">
+                                </div>
+                                <div class="col-10">
+                                    <label for="loginPassword">Password</label>
+                                    <input type="password" class="form-control" id="loginPassword" name="loginPassword"
+                                        placeholder="Password" [(ngModel)]="loginPassword">
+                                    <small id="loginUsernameHelp" class="form-text text-muted">Your password is your
+                                        encryption key. If you forget your password, you lose your data.</small></div>
+                            </div>
+
+                            <p class="text-muted mx-4">New here? <a [routerLink]="" (click)="loadSignupForm()">Create an
+                                    account</a>
+                                <button type="submit" (click)="login()" class="btn btn-dark float-right">Login</button>
+                            </p>
+
+                        </form>
+                    </div>
+                    <div class="toast" role="alert" aria-live="assertive" style="position: absolute; right: 1em; bottom: 1em;" aria-atomic="true">
+                        <div class="toast-header">
+                            <img src="" class="rounded mr-2" alt="...">
+                            <strong class="mr-auto">Bootstrap</strong>
+                            <small class="text-muted">11 mins ago</small>
+                            <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="toast-body">
+                            Hello, world! This is a toast message.
+                        </div>
+                    </div>
+                </div>
+
+
+                <!-- Signup Form -->
+                <div class="container-fluid" class="signup-form">
+                    <div class="row px-4">
+                        <div class="col-12">
+                            <h1 class="mb-5 display-4">Your offline notebook.</h1>
+                            <h5>Store your notes. All offline and fully encrypted.</h5>
+                            <h6>Your data never leaves your device.</h6>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row px-4">
+                        <form>
+                            <div class="form-row mb-4 px-4">
+                                <div class="col-2 vertical-center">
+                                    <img src="../../../../assets/files/illustrations/user.svg"
+                                        class="rounded form-icon-size" alt="Username Icon">
+                                </div>
+                                <div class="col-10">
+                                    <label for="signupUsername">Username</label>
+                                    <input type="text" class="form-control" id="signupUsername" name="signupUsername"
+                                        aria-describedby="signupUsernameHelp" placeholder="Enter username"
+                                        [(ngModel)]="signupUsername">
+                                    <small id="signupUsernameHelp" class="form-text text-muted">Your username will be
+                                        your
+                                        identity.</small>
+                                </div>
+                            </div>
+                            <div class="form-row mb-4 px-4">
+                                <div class="col-2 vertical-center">
+                                    <img src="../../../../assets/files/illustrations/password.svg"
+                                        class="rounded form-icon-size" alt="Password Icon">
+                                </div>
+                                <div class="col-10">
+                                    <label for="signupPassword">Password</label>
+                                    <input type="password" class="form-control" id="signupPassword"
+                                        name="signupPassword" aria-describedby="signupPasswordHelp"
+                                        placeholder="Password" [(ngModel)]="signupPassword">
+                                    <small id="signupPasswordHelp" class="form-text text-muted">Your password is your
+                                        encryption key. If you forget your password, you lose your data.</small></div>
+                            </div>
+                            <div class="form-row mb-4 px-4">
+                                <div class="col-2 vertical-center">
+                                    <img src="../../../../assets/files/illustrations/password.svg"
+                                        class="rounded form-icon-size" alt="Password Icon">
+                                </div>
+                                <div class="col-10">
+                                    <label for="signupRepeatPassword">Repeat Password</label>
+                                    <input type="password" class="form-control" id="signupRepeatPassword"
+                                        name="signupRepeatPassword" placeholder="Repeat Password"
+                                        [(ngModel)]="signupRepeatPassword">
+                                </div>
+                            </div>
+
+                            <p class="text-muted mx-4">Already a member? <a [routerLink]=""
+                                    (click)="loadLoginForm()">Login instead</a>
+                                <button type="submit" (click)="signup()" class="btn btn-dark float-right">Sign
+                                    Up</button>
+                            </p>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
         </div>
-        <form class="log-in" autocomplete="off">
-            <h4>Your <span>Online Notebook</span></h4>
-            <p>Log in to access your notes.</p>
-            <div class="floating-label">
-                <input placeholder="Username" type="text" name="username" id="username" autocomplete="off" [(ngModel)]="username">
-                <label for="email">Username:</label>
-            </div>
-            <div class="floating-label">
-                <input placeholder="Password" type="password" name="password" id="password" autocomplete="off" [(ngModel)]="password">
-                <label for="password">Password:</label>
-            </div>
-            <button type="submit" (click)="signUp()">Sign Up</button>
-            <button type="submit" (click)="authUser()">Log in</button>
-        </form>
     </div>
 </body>

@@ -12,21 +12,17 @@ export class Usercontroller {
 
     constructor(private storage: LocalstorageService, private cipher: Cipher) { }
 
-    getUser() {
-        let userJson: string;
-        let decryptedText: string;
+    getUser(username: string) {
         let user: User;
-        let encryptedData = this.storage.getData();
-        if(encryptedData != null) {
-            user = JSON.parse(this.cipher.decrypt(encryptedData)) || null;
-            return user;
-        }
-        return null;
+        user = this.storage.getData(username);
+        return user;
     }
-    setUser(user: User) {
-        const userJson = JSON.stringify(user);
-        const crypticText = this.cipher.encrypt(userJson);
-        this.storage.storeData(crypticText);
+    addUser(username: string, user: User) {
+        if(this.storage.getData(username) == null) {
+            this.storage.storeData(username, user);            
+        } else {
+            return false;
+        }
         return true;
     }
 }

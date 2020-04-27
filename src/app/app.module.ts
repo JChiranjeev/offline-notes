@@ -9,18 +9,22 @@ import { FormsModule } from '@angular/forms';
 import { StorageServiceModule } from 'ngx-webstorage-service';
 import { LocalstorageService } from './services/localstorage/localstorage.service';
 import { Usercontroller } from './controllers/usercontroller/usercontroller';
-import { SignupComponent } from './components/signup/signup/signup.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
+import { HomeComponent } from './components/home/home/home.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    SignupComponent
+    HomeComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot()
   ],
   providers: [LocalstorageService,Usercontroller],
   bootstrap: [AppComponent]

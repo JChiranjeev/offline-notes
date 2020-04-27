@@ -24,6 +24,10 @@
               "src/assets"
             ],
             "styles": [
+              "node_modules/ngx-toastr/toastr.css",
+              "src/assets/css/animate.css",
+              "src/assets/css/material-colors.css",
+              "src/assets/css/fonts.css",
               "src/styles.css"
             ],
             "scripts": []

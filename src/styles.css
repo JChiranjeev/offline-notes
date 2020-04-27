@@ -1,1 +1,183 @@
 /* You can add global styles to this file, and also import other style files */
+
+/* Small devices (landscape phones, 576px and up) */
+@media (min-width: 360px) {
+    .xs-height-100vh {
+        min-height: 100%;
+        min-height: 100vh;
+    }
+    .xs-width-100vw {
+        min-width: 100%;
+        min-width: 100vw;
+    }
+    .notebook-size {
+        padding-top: 5em;
+        padding-bottom: 5em;
+        width: 60%;
+        width: 60vw;
+    }
+    .form-icon-size {
+        width: 2em;
+    }
+}
+
+/* Small devices (landscape phones, 576px and up) */
+@media (min-width: 576px) {
+    .sm-height-100vh {
+        min-height: 100%;
+        min-height: 100vh;
+    }
+    .sm-width-100vw {
+        min-width: 100%;
+        min-width: 100vw;
+    }
+    .notebook-size {
+        padding-top: 5em;
+        padding-bottom: 5em;
+        width: 60%;
+        width: 60vw;
+    }
+    .form-icon-size {
+        width: 2em;
+    }
+}
+
+/* Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+    .md-height-100vh {
+        min-height: 100%;
+        min-height: 100vh;
+    }
+    .md-width-100vw {
+        min-width: 100%;
+        min-width: 100vw;
+    }
+    .notebook-size {
+        width: 40%;
+        width: 40vw;
+    }
+    .form-icon-size {
+        width: 3em;
+    }
+}
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+    .lg-height-100vh {
+        min-height: 100%;
+        min-height: 100vh;
+    }
+    .lg-width-100vw {
+        min-width: 100%;
+        min-width: 100vw;
+    }
+    .notebook-size {
+        width: 40%;
+        width: 40vw;
+    }
+    .form-icon-size {
+        width: 3em;
+    }
+}
+
+/* Extra large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {
+    .xl-height-100vh {
+        min-height: 100%;
+        min-height: 100vh;
+    }
+    .xl-width-100vw {
+        min-width: 100%;
+        min-width: 100vw;
+    }
+    .notebook-size {
+        width: 40%;
+        width: 40vw;
+    }
+    .form-icon-size {
+        width: 3em;
+    }
+}
+
+.vertical-center {
+    display: flex;
+    align-items: center;
+}
+
+.height-100vh {
+    min-height: 100%;
+    min-height: 100vh;
+}
+
+.width-100vw {
+    min-width: 100%;
+    min-width: 100vw;
+}
+
+.color-blue {
+    background-color: #4361ee;
+}
+
+.color-sky-blue {
+    background-color: #4cc9f0;
+}
+
+.color-dark-blue {
+    background-color: #3a0ca3;
+}
+
+.color-grey {
+    background-color: #F4F4F4;
+}
+
+.color-purple {
+    background-color: #7209b7;
+}
+
+.color-pink {
+    background-color: #f72585;
+}
+
+.opacity-0 {
+    opacity: 0;
+}
+
+.opacity-10 {
+    opacity: 0.1;
+}
+
+.opacity-20 {
+    opacity: 0.2;
+}
+
+.opacity-30 {
+    opacity: 0.3;
+}
+
+.opacity-40 {
+    opacity: 0.4;
+}
+
+.opacity-50 {
+    opacity: 0.5;
+}
+
+.opacity-60 {
+    opacity: 0.6;
+}
+
+.opacity-70 {
+    opacity: 0.7;
+}
+
+.opacity-80 {
+    opacity: 0.8;
+}
+
+.opacity-90 {
+    opacity: 0.9;
+}
+
+.opacity-100 {
+    opacity: 1;
+}

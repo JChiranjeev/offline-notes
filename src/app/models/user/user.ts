@@ -1,7 +1,8 @@
-import { Note } from '../note/note';
+import { Book } from '../book/book';
 
 export class User {
+    constructor() { }
     username : string;
     password : string;
-    notes : Array<Note>;
+    books : Array<Book>;
 }
