@@ -23,7 +23,7 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     if (sessionStorage.getItem("username") == null) {
       this.location.replaceState("/");
-      this.router.navigate(["/"]);
+      this.router.navigate(["login"]);
     } else {
       this.user = this.userController.getUser(sessionStorage.getItem("username"));
       console.log("The Username is: " + this.user.username);
