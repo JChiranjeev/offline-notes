@@ -63,30 +63,36 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-    let user: User;
-    user = this.userController.getUser(this.loginUsername);
-    console.log(user);
-    if (user != null) {
-      if (user.username == this.loginUsername) {
-        if (user.password == this.loginPassword) {
-          sessionStorage.setItem("username", this.loginUsername);
-          sessionStorage.setItem("password", this.loginPassword);
-          console.log("Login Successful");
-          this.location.replaceState("/");
-          this.router.navigate(["home"]);
-          return true;
-        } else {
-          this.toastr.error("Incorrect Password. Please try again", null, {
-            positionClass: 'toast-bottom-right'
-          });
-        }
-      };
-    } else {
-      this.toastr.warning("Account does not exist. Please Signup", null, {
+    try {
+      sessionStorage.setItem("password", this.loginPassword);
+      let user: User;
+      user = this.userController.getUser(this.loginUsername);
+      console.log(user);
+      if (user != null) {
+        if (user.username == this.loginUsername) {
+          if (user.password == this.loginPassword) {
+            sessionStorage.setItem("username", this.loginUsername);
+            sessionStorage.setItem("password", this.loginPassword);
+            console.log("Login Successful");
+            this.location.replaceState("/");
+            this.router.navigate(["home"]);
+            return true;
+          } else {
+            this.toastr.error("Incorrect Password. Please try again", null, {
+              positionClass: 'toast-bottom-right'
+            });
+          }
+        };
+      } else {
+        this.toastr.warning("Account does not exist. Please Signup", null, {
+          positionClass: 'toast-bottom-right'
+        });
+      }
+    } catch (error) {
+      console.log(error);
+      this.toastr.error("Incorrect Password. Please try again", null, {
         positionClass: 'toast-bottom-right'
       });
-      // this.location.replaceState("/");
-      // this.router.navigate(["signup"]);
     }
   }
 

@@ -14,12 +14,17 @@ export class LocalstorageService {
   constructor(@Inject(LOCAL_STORAGE) private storage : StorageService, private cipher : Cipher) { }
 
   getData(username: string) {
-    let tempData = this.storage.get(username) || null;
-    if(tempData != null) {
-      this.userData = JSON.parse(this.cipher.decrypt(this.storage.get(username)));
-      return this.userData;
-    }
-    return null;
+    // try {
+      let tempData = this.storage.get(username) || null;
+      if(tempData != null) {
+        this.userData = JSON.parse(this.cipher.decrypt(tempData));
+        return this.userData;
+      }
+      return null;
+    // } catch (error) {
+    //   console.log(error);
+    //   throw error;
+    // }
   }
 
   storeData(username: string, user: User) {
