@@ -19,6 +19,9 @@
     .form-icon-size {
         width: 2em;
     }
+    .form-icon-size-sm {
+        width: 1.5em;
+    }
 }
 
 /* Small devices (landscape phones, 576px and up) */
@@ -40,6 +43,9 @@
     .form-icon-size {
         width: 2em;
     }
+    .form-icon-size-sm {
+        width: 1.5em;
+    }
 }
 
 /* Medium devices (tablets, 768px and up) */
@@ -58,6 +64,9 @@
     }
     .form-icon-size {
         width: 3em;
+    }
+    .form-icon-size-sm {
+        width: 1.5em;
     }
 }
 
@@ -78,6 +87,9 @@
     .form-icon-size {
         width: 3em;
     }
+    .form-icon-size-sm {
+        width: 1.5em;
+    }
 }
 
 /* Extra large devices (large desktops, 1200px and up) */
@@ -96,6 +108,9 @@
     }
     .form-icon-size {
         width: 3em;
+    }
+    .form-icon-size-sm {
+        width: 1.5em;
     }
 }
 

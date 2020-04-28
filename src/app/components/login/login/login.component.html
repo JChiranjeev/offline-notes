@@ -49,7 +49,7 @@
 
                             <p class="text-muted mx-4">New here? <a [routerLink]="" (click)="loadSignupForm()">Create an
                                     account</a>
-                                <button type="submit" (click)="login()" class="btn btn-dark float-right">Login</button>
+                                <button type="button" (click)="login()" class="btn btn-dark float-right">Login</button>
                             </p>
 
                         </form>
@@ -82,6 +82,19 @@
                     <br>
                     <div class="row px-4">
                         <form>
+                            <div class="form-row mb-4 px-4">
+                                <div class="col-2 vertical-center">
+                                    <img src="../../../../assets/files/illustrations/name.svg"
+                                        class="rounded form-icon-size" alt="Name Icon">
+                                </div>
+                                <div class="col-10">
+                                    <label for="signupName">Name</label>
+                                    <input type="text" class="form-control" id="signupName" name="signupName"
+                                        aria-describedby="signupNameHelp" placeholder="Enter your Name"
+                                        [(ngModel)]="signupName">
+                                    <small id="signupNameHelp" class="form-text text-muted">This will be your display name.</small>
+                                </div>
+                            </div>
                             <div class="form-row mb-4 px-4">
                                 <div class="col-2 vertical-center">
                                     <img src="../../../../assets/files/illustrations/user.svg"
@@ -125,7 +138,7 @@
 
                             <p class="text-muted mx-4">Already a member? <a [routerLink]=""
                                     (click)="loadLoginForm()">Login instead</a>
-                                <button type="submit" (click)="signup()" class="btn btn-dark float-right">Sign
+                                <button type="button" (click)="signup()" class="btn btn-dark float-right">Sign
                                     Up</button>
                             </p>
 

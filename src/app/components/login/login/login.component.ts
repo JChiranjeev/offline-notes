@@ -5,6 +5,7 @@ import { Location } from '@angular/common';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Book } from 'src/app/models/book/book';
+import { Note } from 'src/app/models/note/note';
 
 @Component({
   selector: 'app-login',
@@ -18,6 +19,7 @@ export class LoginComponent implements OnInit {
   signupUsername: string;
   signupPassword: string;
   signupRepeatPassword: string;
+  signupName: string;
   loginOrSignup: string = null;
   loginForm: Element;
   signupForm: Element;
@@ -108,12 +110,17 @@ export class LoginComponent implements OnInit {
       if (this.signupPassword == this.signupRepeatPassword) {
         sessionStorage.setItem("username", this.signupUsername);
         sessionStorage.setItem("password", this.signupPassword);
+        user.name = this.signupName;
         user.username = this.signupUsername;
         user.password = this.signupPassword;
         user.books = new Array<Book>();
+        user.books.push({
+          bookTitle: 'First Book',
+          notes: new Array<Note>()
+        })
         if (this.userController.addUser(this.signupUsername, user)) {
-          this.location.replaceState("/");
-          this.router.navigate(["login"]);
+          this.loginForm.classList.remove("hidden");
+          this.signupForm.classList.add("hidden");
         }
       } else {
         console.log("Passwords don't match.");

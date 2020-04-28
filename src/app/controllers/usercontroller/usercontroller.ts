@@ -19,10 +19,18 @@ export class Usercontroller {
     }
     addUser(username: string, user: User) {
         if(this.storage.getData(username) == null) {
-            this.storage.storeData(username, user);            
+            this.storage.storeData(username, user);
+            return true;
         } else {
             return false;
         }
-        return true;
+    }
+    saveUser(username: string, user: User) {
+        if(this.storage.getData(username) != null) {
+            this.storage.storeData(username, user);
+            return true;
+        } else {
+            return false;
+        }
     }
 }
