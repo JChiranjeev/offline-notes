@@ -12,6 +12,7 @@ import { Usercontroller } from './controllers/usercontroller/usercontroller';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { HomeComponent } from './components/home/home/home.component';
+import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { HomeComponent } from './components/home/home/home.component';
     AppRoutingModule,
     FormsModule,
     BrowserAnimationsModule,
+    CKEditorModule,
     ToastrModule.forRoot()
   ],
   providers: [LocalstorageService,Usercontroller],

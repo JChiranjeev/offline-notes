@@ -5,14 +5,15 @@
             <div class="col-md-3 col-sm-12">
                 <div class="list-group mb-3">
                     <button type="button" *ngFor="let book of user.books"
-                        class="list-group-item list-group-item-action book-list-item font-raleway-600" (click)="selectBook(book)">
+                        class="list-group-item list-group-item-action book-list-item font-raleway-600"
+                        (click)="openBook(book)">
                         <img src="../../../../assets/files/illustrations/book.svg"
                             class="rounded form-icon-size-sm mr-3" alt="Book Icon">
                         {{book.bookTitle}}
                     </button>
                 </div>
-                <button type="button" class="list-group-item list-group-item-action vertical-center font-raleway-500" data-toggle="modal"
-                    data-target="#newBookNameModal" style="border: none;">
+                <button type="button" class="list-group-item list-group-item-action vertical-center font-raleway-500"
+                    data-toggle="modal" data-target="#newBookNameModal" style="border: none;">
                     <img src="../../../../assets/files/illustrations/new.svg" class="rounded form-icon-size-sm mr-3"
                         alt="New Book Icon">
                     New Book
@@ -21,10 +22,11 @@
             <div class="col-md-3 col-sm-12 notes-list">
                 <div class="list-group mb-3">
                     <button type="button" *ngFor="let note of currentBook.notes"
-                        class="list-group-item list-group-item-action note-list-item font-raleway-600 h5" (click)="openNote(note)">
-                            <p class="note-title-preview">
-                                <img src="../../../../assets/files/illustrations/note.svg"
-                                    class="rounded form-icon-size-sm mr-3" alt="Note Icon">{{note.noteTitle}}</p>
+                        class="list-group-item list-group-item-action note-list-item font-raleway-600 h5"
+                        (click)="openNote(note)">
+                        <p class="note-title-preview">
+                            <img src="../../../../assets/files/illustrations/note.svg"
+                                class="rounded form-icon-size-sm mr-3" alt="Note Icon">{{note.noteTitle}}</p>
                         <p class="note-content-preview h6 font-raleway-400">{{note.noteContent}}</p>
                     </button>
                 </div>
@@ -38,14 +40,13 @@
             <div class="col-md-6 col-sm-12 new-note-input">
                 <div class="input-group">
                     <input type="text" class="px-4 py-4 form-control font-raleway-600" placeholder="Title"
-                        [(ngModel)]="noteTitle" (input)="onTitleChange($event.target.value)">
+                        [(ngModel)]="noteTitle">
                 </div>
                 <br>
                 <div class="overflow-auto">
                     <div class="input-group">
-                        <textarea class="px-4 py-4 form-control font-raleway-500" placeholder="Content"
-                            style="height: 60vh;" [(ngModel)]="noteContent"
-                            (input)="onContentChange($event.target.value)"></textarea>
+                        <ckeditor [editor]="Editor" style="height: 60vh; width: 100%;" (change)="onContentChange($event)" [(ngModel)]="model.editorData">
+                        </ckeditor>
                     </div>
                 </div>
                 <div class="row mt-3 mr-1 float-right">
@@ -53,9 +54,9 @@
                         [disabled]="discardDisabled">
                         <img src="../../../../assets/files/illustrations/cancel.svg"
                             class="rounded form-icon-size-sm mr-3" alt="New Book Icon">Discard</button>
-                    <button type="button" class="btn btn-primary ml-3" (click)="saveNote()" [disabled]="saveDisabled"><img
-                            src="../../../../assets/files/illustrations/save.svg" class="rounded form-icon-size-sm mr-3"
-                            alt="New Book Icon">Save</button>
+                    <button type="button" class="btn btn-primary ml-3" (click)="saveNote()"
+                        [disabled]="saveDisabled"><img src="../../../../assets/files/illustrations/save.svg"
+                            class="rounded form-icon-size-sm mr-3" alt="New Book Icon">Save</button>
                     <!-- <button type="button" class="btn btn-danger ml-3">Discard</button>
                     <button type="button" class="btn btn-success ml-3">Save</button> -->
                 </div>

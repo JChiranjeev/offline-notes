@@ -5,6 +5,8 @@ import { Usercontroller } from 'src/app/controllers/usercontroller/usercontrolle
 import { User } from 'src/app/models/user/user';
 import { Book } from 'src/app/models/book/book';
 import { Note } from 'src/app/models/note/note';
+import { ChangeEvent } from '@ckeditor/ckeditor5-angular/ckeditor.component';
+import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 @Component({
   selector: 'app-home',
@@ -13,19 +15,25 @@ import { Note } from 'src/app/models/note/note';
 })
 export class HomeComponent implements OnInit {
 
+  public model = {
+    editorData: ""
+  };
+  public Editor = ClassicEditor;
   user: User;
   bookListItem: Element;
   noteListItem: Element;
   newBookName: string;
   currentBook: Book;
+  currentNote: Note;
   noteTitle: string;
-  noteContent: string;
   newNoteInputDiv: Element;
   notesListDiv: Element;
   discardDisabled: boolean = true;
   saveDisabled: boolean = true;
   titleChanged: boolean = false;
   contentChanged: boolean = false;
+  newNote: boolean = true;
+  currentNoteIndex: number;
 
   constructor(private router: Router, private location: Location, private userController: Usercontroller) { }
 
@@ -38,13 +46,28 @@ export class HomeComponent implements OnInit {
       console.log("The Username is: " + this.user.username);
     }
     this.newNoteInputDiv = document.getElementsByClassName("new-note-input")[0];
-    this.newNoteInputDiv.setAttribute("hidden",null);
+    this.newNoteInputDiv.setAttribute("hidden", null);
     this.currentBook = this.user.books[0];
     this.notesListDiv = document.getElementsByClassName("notes-list")[0];
-    this.notesListDiv.setAttribute("hidden",null);
+    this.notesListDiv.setAttribute("hidden", null);
   }
 
-  selectBook(book: Book) {
+  createNewBook() {
+    console.log("New Book Name: " + this.newBookName);
+    this.user.books.push({ bookTitle: this.newBookName, notes: new Array<Note>() });
+    this.userController.saveUser(this.user.username, this.user);
+  }
+
+  createNewNote() {
+    this.newNote = true;
+    this.currentNote = new Note();
+    console.log("New Note");
+    this.newNoteInputDiv.removeAttribute("hidden");
+    this.noteTitle = "";
+    this.model.editorData = "";
+  }
+
+  openBook(book: Book) {
     this.notesListDiv.removeAttribute("hidden");
     this.currentBook = book;
     let index = this.user.books.indexOf(book);
@@ -57,66 +80,47 @@ export class HomeComponent implements OnInit {
   }
 
   openNote(note: Note) {
-    let index = this.currentBook.notes.indexOf(note);
+    this.newNote = false;
+    this.currentNote = note;
+    this.currentNoteIndex = this.currentBook.notes.indexOf(note);
     for (let i = 0; i < this.currentBook.notes.length; i++) {
       document.getElementsByClassName("note-list-item")[i].classList.remove("active");
     }
-    this.noteListItem = document.getElementsByClassName("note-list-item")[index];
+    this.noteListItem = document.getElementsByClassName("note-list-item")[this.currentNoteIndex];
     this.noteListItem.classList.add("active");
-    this.noteContent = note.noteContent;
+    this.model.editorData = note.noteContent;
     this.noteTitle = note.noteTitle;
     this.newNoteInputDiv.removeAttribute("hidden");
   }
 
-  createNewBook() {
-    console.log("New Book Name: " + this.newBookName);
-    this.user.books.push({bookTitle: this.newBookName, notes: new Array<Note>()});
-    this.userController.saveUser(this.user.username, this.user);
-  }
-  
-  createNewNote() {
-    console.log("New Note");
-    this.newNoteInputDiv.removeAttribute("hidden");
-  }
-
   saveNote() {
-    this.currentBook.notes.push({
+    this.currentNote = {
       noteTitle: this.noteTitle,
-      noteContent: this.noteContent 
-    });
+      noteContent: this.model.editorData
+    }
+    if(this.newNote) {
+      this.currentBook.notes.push(this.currentNote);
+    } else {
+      this.currentBook.notes[this.currentNoteIndex] = this.currentNote;
+    }
     this.userController.saveUser(this.user.username, this.user);
     this.noteTitle = "";
-    this.noteContent = "";
+    this.model.editorData = "";
   }
 
   discardNote() {
     this.noteTitle = "";
-    this.noteContent = "";
-    this.newNoteInputDiv.setAttribute("hidden",null);
+    this.model.editorData = "";
+    this.newNoteInputDiv.setAttribute("hidden", null);
   }
 
-  onContentChange(content : string) {
-    if(content.length > 0) {
+  onContentChange({ editor }: ChangeEvent) {
+    if (editor.getData().length > 0) {
       this.contentChanged = true;
     } else {
       this.contentChanged = false;
     }
-    if(this.contentChanged && this.titleChanged) {
-      this.saveDisabled = false;
-      this.discardDisabled = false;
-    } else {
-      this.saveDisabled = true;
-      this.discardDisabled = true;
-    }
-  }
-
-  onTitleChange(title : string) {
-    if(title.length > 0) {
-      this.titleChanged = true;
-    } else {
-      this.titleChanged = false;
-    }
-    if(this.contentChanged && this.titleChanged) {
+    if (this.contentChanged) {
       this.saveDisabled = false;
       this.discardDisabled = false;
     } else {
