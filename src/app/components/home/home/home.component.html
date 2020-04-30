@@ -22,12 +22,10 @@
             <div class="col-md-3 col-sm-12 notes-list">
                 <div class="list-group mb-3">
                     <button type="button" *ngFor="let note of currentBook.notes"
-                        class="list-group-item list-group-item-action note-list-item font-raleway-600 h5"
+                        class="list-group-item list-group-item-action note-list-item font-raleway-500"
                         (click)="openNote(note)">
-                        <p class="note-title-preview">
-                            <img src="../../../../assets/files/illustrations/note.svg"
-                                class="rounded form-icon-size-sm mr-3" alt="Note Icon">{{note.noteTitle}}</p>
-                        <p class="note-content-preview h6 font-raleway-400">{{note.noteContent}}</p>
+                        <img src="../../../../assets/files/illustrations/note.svg"
+                            class="rounded form-icon-size-sm mr-3" alt="Note Icon">{{note.noteTitle}}
                     </button>
                 </div>
                 <button type="button" class="list-group-item list-group-item-action vertical-center font-raleway-500"
@@ -45,18 +43,25 @@
                 <br>
                 <div class="overflow-auto">
                     <div class="input-group">
-                        <ckeditor [editor]="Editor" style="height: 60vh; width: 100%;" (change)="onContentChange($event)" [(ngModel)]="model.editorData">
+                        <ckeditor [editor]="Editor"
+                            [config]="{ toolbar: [ 'heading', '|', 'bold', 'italic', 'link', 'bulletedList', 'numberedList', 'blockQuote' ] }"
+                            style="height: 60vh; width: 100%;" (change)="onContentChange($event)"
+                            [(ngModel)]="model.editorData">
                         </ckeditor>
                     </div>
                 </div>
                 <div class="row mt-3 mr-1 float-right">
+                    <button type="button" class="btn btn-outline-danger ml-3" (click)="deleteNote()"
+                        [disabled]="deleteDisabled">
+                        <img src="../../../../assets/files/illustrations/delete.svg"
+                            class="rounded form-icon-size-sm mr-3" alt="Delete Note Icon">Delete</button>
                     <button type="button" class="btn btn-outline-secondary ml-3" (click)="discardNote()"
                         [disabled]="discardDisabled">
                         <img src="../../../../assets/files/illustrations/cancel.svg"
-                            class="rounded form-icon-size-sm mr-3" alt="New Book Icon">Discard</button>
+                            class="rounded form-icon-size-sm mr-3" alt="Discard Note Icon">Discard</button>
                     <button type="button" class="btn btn-primary ml-3" (click)="saveNote()"
                         [disabled]="saveDisabled"><img src="../../../../assets/files/illustrations/save.svg"
-                            class="rounded form-icon-size-sm mr-3" alt="New Book Icon">Save</button>
+                            class="rounded form-icon-size-sm mr-3" alt="Save Note Icon">Save</button>
                     <!-- <button type="button" class="btn btn-danger ml-3">Discard</button>
                     <button type="button" class="btn btn-success ml-3">Save</button> -->
                 </div>

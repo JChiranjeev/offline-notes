@@ -32,6 +32,7 @@ export class HomeComponent implements OnInit {
   saveDisabled: boolean = true;
   titleChanged: boolean = false;
   contentChanged: boolean = false;
+  deleteDisabled: boolean = true;
   newNote: boolean = true;
   currentNoteIndex: number;
 
@@ -114,7 +115,19 @@ export class HomeComponent implements OnInit {
     this.newNoteInputDiv.setAttribute("hidden", null);
   }
 
+  deleteNote() {
+    this.currentBook.notes.splice(this.currentNoteIndex,1);
+    this.userController.saveUser(this.user.username, this.user);
+    this.noteTitle = "";
+    this.model.editorData = "";
+  }
+
   onContentChange({ editor }: ChangeEvent) {
+    if(this.newNote) {
+      this.deleteDisabled = true;
+    } else {
+      this.deleteDisabled = false;
+    }
     if (editor.getData().length > 0) {
       this.contentChanged = true;
     } else {

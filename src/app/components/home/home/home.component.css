@@ -1,5 +1,6 @@
 .book-list-item {
     border: none;
+    border: 1px solid grey;
 }
 
 .book-list-item.active {
@@ -9,27 +10,10 @@
 
 .note-list-item {
     border: none;
+    border: 1px solid grey;
 }
 
 .note-list-item.active {
     border: none;
     background-color: #2196f3;
-}
-
-.note-content-preview {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    /* number of lines to show */
-    -webkit-box-orient: vertical;
-}
-
-.note-title-preview {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    display: -webkit-box;
-    -webkit-line-clamp: 1;
-    /* number of lines to show */
-    -webkit-box-orient: vertical;
 }
