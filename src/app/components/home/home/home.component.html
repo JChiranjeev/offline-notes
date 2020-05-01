@@ -1,5 +1,5 @@
-<body class="color-grey height-100vh">
-    <h1 class="px-5 py-5 bg-blue-500 fg-white">Welcome {{user.name}}</h1>
+<body class="height-100vh">
+    <h1 class="px-5 py-5 banner">Welcome {{user.name}}</h1>
     <div class="container-fluid px-5">
         <div class="row pt-3">
             <div class="col-md-3 col-sm-12">
@@ -12,8 +12,9 @@
                         {{book.bookTitle}}
                     </button>
                 </div>
-                <button type="button" class="list-group-item list-group-item-action vertical-center font-raleway-500"
-                    data-toggle="modal" data-target="#newBookNameModal" style="border: none;">
+                <button type="button"
+                    class="list-group-item list-group-item-action new-button vertical-center font-raleway-500"
+                    data-toggle="modal" data-target="#newBookNameModal">
                     <img src="../../../../assets/files/illustrations/new.svg" class="rounded form-icon-size-sm mr-3"
                         alt="New Book Icon">
                     New Book
@@ -22,14 +23,17 @@
             <div class="col-md-3 col-sm-12 notes-list">
                 <div class="list-group mb-3">
                     <button type="button" *ngFor="let note of currentBook.notes"
-                        class="list-group-item list-group-item-action note-list-item font-raleway-500"
+                        class="list-group-item list-group-item-action note-list-item font-raleway-500 pr-4"
                         (click)="openNote(note)">
                         <img src="../../../../assets/files/illustrations/note.svg"
                             class="rounded form-icon-size-sm mr-3" alt="Note Icon">{{note.noteTitle}}
+                        <img src="../../../../assets/files/illustrations/delete.svg"
+                            class="rounded form-icon-size-sm float-right" alt="Delete Icon">
                     </button>
                 </div>
-                <button type="button" class="list-group-item list-group-item-action vertical-center font-raleway-500"
-                    (click)="createNewNote()" style="border: none;">
+                <button type="button"
+                    class="list-group-item list-group-item-action new-button vertical-center font-raleway-500"
+                    (click)="createNewNote()">
                     <img src="../../../../assets/files/illustrations/new.svg" class="rounded form-icon-size-sm mr-3"
                         alt="New Book Icon">
                     New Note
@@ -37,29 +41,36 @@
             </div>
             <div class="col-md-6 col-sm-12 new-note-input">
                 <div class="input-group">
-                    <input type="text" class="px-4 py-4 form-control font-raleway-600" placeholder="Title"
-                        [(ngModel)]="noteTitle">
+                    <input type="text" class="px-4 py-4 form-control font-raleway-600 note-title-input"
+                        placeholder="Title" [(ngModel)]="noteTitle">
                 </div>
-                <br>
+                <p class="mx-1 mb-4 mt-1 px-4" style="font-size: 0.8em; color: #2c3e50;">
+                    <span class="mr-5">{{noteTimestamp | date:'dd-MMM-yyyy'}}</span>
+                    <span>{{noteTimestamp | date: 'HH:mm'}}</span>
+                </p>
                 <div class="overflow-auto">
                     <div class="input-group">
-                        <ckeditor [editor]="Editor"
-                            [config]="{ toolbar: [ 'heading', '|', 'bold', 'italic', 'link', 'bulletedList', 'numberedList', 'blockQuote' ] }"
-                            style="height: 60vh; width: 100%;" (change)="onContentChange($event)"
-                            [(ngModel)]="model.editorData">
+                        <ckeditor [editor]="Editor" class="note-content-input" style="
+                        height: 60vh; 
+                        width: 100%;
+                        box-shadow: 0 50px 20px 0 rgba(44,62,80 ,0.5);"
+                            [config]="{ toolbar: [ 'heading', '|', 'bold', 'italic', 'link', 'bulletedList', 'numberedList', 'blockQuote', 'undo', 'redo' ] }"
+                            (change)="onContentChange($event)" [(ngModel)]="model.editorData">
                         </ckeditor>
                     </div>
                 </div>
                 <div class="row mt-3 mr-1 float-right">
-                    <button type="button" class="btn btn-outline-danger ml-3" (click)="deleteNote()"
-                        [disabled]="deleteDisabled">
+                    <button type="button" class="btn bg-blue-grey-500 fg-white ml-3" data-toggle="modal"
+                        data-target="#deleteNoteConfirmation" [disabled]="deleteDisabled">
                         <img src="../../../../assets/files/illustrations/delete.svg"
-                            class="rounded form-icon-size-sm mr-3" alt="Delete Note Icon">Delete</button>
-                    <button type="button" class="btn btn-outline-secondary ml-3" (click)="discardNote()"
+                            class="rounded form-icon-size-sm mr-3" alt="Delete Note Icon">
+                        Delete
+                    </button>
+                    <button type="button" class="btn bg-blue-grey-700 fg-white ml-3" (click)="discardNote()"
                         [disabled]="discardDisabled">
                         <img src="../../../../assets/files/illustrations/cancel.svg"
                             class="rounded form-icon-size-sm mr-3" alt="Discard Note Icon">Discard</button>
-                    <button type="button" class="btn btn-primary ml-3" (click)="saveNote()"
+                    <button type="button" class="btn bg-blue-grey-900 fg-white ml-3" (click)="saveNote()"
                         [disabled]="saveDisabled"><img src="../../../../assets/files/illustrations/save.svg"
                             class="rounded form-icon-size-sm mr-3" alt="Save Note Icon">Save</button>
                     <!-- <button type="button" class="btn btn-danger ml-3">Discard</button>
@@ -92,6 +103,26 @@
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                     <button type="button" class="btn btn-primary" (click)="createNewBook()" data-dismiss="modal">Save
                         changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="deleteNoteConfirmation" tabindex="-1" role="dialog"
+        aria-labelledby="deleteNoteConfirmationTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deleteNoteConfirmationTitle">Are you sure to delete the note?</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="deleteNote()">Delete
+                        Note</button>
                 </div>
             </div>
         </div>

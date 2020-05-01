@@ -35,6 +35,7 @@ export class HomeComponent implements OnInit {
   deleteDisabled: boolean = true;
   newNote: boolean = true;
   currentNoteIndex: number;
+  noteTimestamp: Date;
 
   constructor(private router: Router, private location: Location, private userController: Usercontroller) { }
 
@@ -57,6 +58,9 @@ export class HomeComponent implements OnInit {
     console.log("New Book Name: " + this.newBookName);
     this.user.books.push({ bookTitle: this.newBookName, notes: new Array<Note>() });
     this.userController.saveUser(this.user.username, this.user);
+    for (let i = 0; i < this.user.books.length; i++) {
+      document.getElementsByClassName("book-list-item")[i].classList.remove("active");
+    }
   }
 
   createNewNote() {
@@ -66,6 +70,9 @@ export class HomeComponent implements OnInit {
     this.newNoteInputDiv.removeAttribute("hidden");
     this.noteTitle = "";
     this.model.editorData = "";
+    for (let i = 0; i < this.currentBook.notes.length; i++) {
+      document.getElementsByClassName("note-list-item")[i].classList.remove("active");
+    }
   }
 
   openBook(book: Book) {
@@ -83,6 +90,7 @@ export class HomeComponent implements OnInit {
   openNote(note: Note) {
     this.newNote = false;
     this.currentNote = note;
+    this.noteTimestamp = note.timestamp;
     this.currentNoteIndex = this.currentBook.notes.indexOf(note);
     for (let i = 0; i < this.currentBook.notes.length; i++) {
       document.getElementsByClassName("note-list-item")[i].classList.remove("active");
@@ -97,7 +105,8 @@ export class HomeComponent implements OnInit {
   saveNote() {
     this.currentNote = {
       noteTitle: this.noteTitle,
-      noteContent: this.model.editorData
+      noteContent: this.model.editorData,
+      timestamp: new Date()
     }
     if(this.newNote) {
       this.currentBook.notes.push(this.currentNote);
@@ -105,8 +114,8 @@ export class HomeComponent implements OnInit {
       this.currentBook.notes[this.currentNoteIndex] = this.currentNote;
     }
     this.userController.saveUser(this.user.username, this.user);
-    this.noteTitle = "";
-    this.model.editorData = "";
+    this.saveDisabled = true;
+    this.discardDisabled = true;
   }
 
   discardNote() {
@@ -120,6 +129,7 @@ export class HomeComponent implements OnInit {
     this.userController.saveUser(this.user.username, this.user);
     this.noteTitle = "";
     this.model.editorData = "";
+    this.newNoteInputDiv.setAttribute("hidden",null);
   }
 
   onContentChange({ editor }: ChangeEvent) {
