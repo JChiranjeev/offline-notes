@@ -21,7 +21,7 @@
     "@angular/router": "~9.1.0",
     "@ckeditor/ckeditor5-angular": "^1.2.3",
     "@ckeditor/ckeditor5-build-classic": "^19.0.0",
-    "@ckeditor/ckeditor5-font": "^19.0.0",
+    "@ckeditor/ckeditor5-font": "^27.0.0",
     "angular-disable-browser-back-button": "^1.0.1",
     "crypto-js": "^4.0.0",
     "ngx-toastr": "^12.0.1",
